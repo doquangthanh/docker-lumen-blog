@@ -14,20 +14,11 @@ RUN apt-get update && apt-get install -y software-properties-common language-pac
 RUN apt-get clean
 
 # Install Composer
-RUN curl -s http://getcomposer.org/installer | php \
-    && mv composer.phar /usr/local/bin/ \
-    && echo "alias composer='/usr/local/bin/composer.phar'" >> ~/.bashrc
-
-# Source the bash
-RUN . ~/.bashrc
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Clean up
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ENV COMPOSER_ALLOW_SUPERUSER 1
-
-ADD init.sh /sbin/init.sh
-RUN chmod +x /sbin/init.sh
-CMD ["/sbin/init.sh"]
 
 WORKDIR /var/www

@@ -42,8 +42,7 @@ services:
         - "6379"
 
   ### Application Code Container
-  application:
-    build: ./build/application
+
 
 
   ### Workspace Utilities Container
