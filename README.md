@@ -1,5 +1,5 @@
-# Docker Lumen
-
+# Docker Lumen Framework 
+[![Build Status](https://travis-ci.org/doquangthanh/docker-lumen-blog.svg?branch=master)](https://travis-ci.org/doquangthanh/docker-lumen-blog)
 ### Install
 
 Before you start make sure you have [Docker Compose](https://docs.docker.com/compose/install/) installed on your machine.
