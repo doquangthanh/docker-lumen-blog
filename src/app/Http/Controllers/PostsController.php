@@ -1,238 +1,68 @@
 <?php
+
 namespace App\Http\Controllers;
 
-use App\Post;
 use Illuminate\Http\Request;
+use App\Post;
+use App\Services\PostSlugBuilder;
+
 
 class PostsController extends Controller
 {
-
-    protected $success = true;
-
-    protected $data = [];
-
-    protected $response_code = 200;
-
-    /**
-     * signifies which methods require auth in class
-     *
-     * @method __construct
-     */
-    public function __construct()
+    /* Display all posts */
+    public function posts()
     {
-        $this->middleware('auth', [
-            'only' => [
-                'getAllPosts',
-                'getPost',
-                'deletePost',
-                'insertPost',
-                'updatePost'
-            ]
-        ]);
-    }
 
-    /**
-     * Return all posts from database
-     *
-     * @method getAllPosts
-     * @return string JSON containing all the posts
-     */
-    public function getAllPosts()
-    {
         $posts = Post::all();
-        
-        if (! $posts || count($posts) == 0) {
-            
-            $this->success = false;
-            
-            $this->data = [
-                'message' => (string) 'No posts found'
-            ];
-            
-            $this->response_code = 404;
-        } else {
-            
-            $this->success = true;
-            
-            foreach ($posts as $post) {
-                
-                $this->data[] = [
-                    'id' => (int) $post->id,
-                    'user_id' => (int) $post->user_id,
-                    'title' => (string) $post->title,
-                    'content' => (string) $post->content
-                ];
-            }
-        }
-        
-        return parent::jsonResponse($this);
+        return response()->json($posts);
     }
 
     /**
-     * Return a post by ID
-     *
-     * @method getPost
-     * @param Request $request
-     *            Response class
-     * @param int $id
-     *            id of required post
-     * @return string JSON containg the post data
+     * Get the specified Post from DB.
+     * @param  int  $id
      */
-    public function getPost(Request $request, $id)
+    public function postById($id)
     {
-        $post = Post::find($id);
-        
-        if (! $post) {
-            
-            $this->success = false;
-            
-            $this->data = [
-                'message' => (string) 'Post not found'
-            ];
-            
-            $this->response_code = 404;
-        } else {
-            
-            $this->data = [
-                'id' => (int) $post->id,
-                'user_id' => (int) $post->user_id,
-                'title' => (string) $post->title,
-                'content' => (string) $post->content
-            ];
+        $post = Post::where('id', $id)->first();
+        if(count($post)){
+            return response()->json($post);
         }
-        
-        return parent::jsonResponse($this);
+        else{
+            return response()->json(['status' => 'Post is not available or deleted!']);
+        }
     }
 
-    /**
-     * Deletes a post
-     *
-     * @method deletePost
-     * @param Request $request
-     *            Request class
-     * @return string JSON containing deleted post id and success value
+     /**
+    * Create new Post
      */
-    public function deletePost(Request $request)
-    {
-        $id = $request->input('id');
-        
-        $post = Post::find($id);
-        
-        if (! $post) {
-            
-            $this->success = false;
-            
-            $this->data = [
-                'message' => (string) 'Post not found'
-            ];
-            
-            $this->response_code = 404;
-        } else {
-            
-            $post->delete();
-            
-            $this->data = [
-                'id' => (int) $post->id
-            ];
-        }
-        
-        return parent::jsonResponse($this);
-    }
+    //  public function createPost(Request $request)
+    //  {
 
-    /**
-     * Inserts a post to the DB
-     *
-     * @method insertPost
-     * @param Request $request
-     *            Request class
-     * @return string JSON object of inserted post values
-     */
-    public function insertPost(Request $request)
-    {
-        $post = new Post();
-        
-        $post->user_id = $request->input('user_id');
-        
-        $post->title = $request->input('title');
-        
-        $post->content = $request->input('content');
-        
-        $post->save();
-        
-        if (! $post) {
-            
-            $this->success = false;
-            
-            $this->data = [
-                'message' => (string) 'Post not inserted'
-            ];
-            
-            $this->response_code = 500;
-        } else {
-            
-            $this->data = [
-                'id' => (int) $post->id,
-                'user_id' => (int) $post->user_id,
-                'title' => (string) $post->title,
-                'content' => (string) $post->content
-            ];
-        }
-        
-        return parent::jsonResponse($this);
-    }
+    //     $this->validate($request, [
+    //         'title' => 'required',
+    //         'content' => 'required',
+    //         'status' => 'required',
+    //         'slug' => 'required'
+    //         'category_id' => 'required'
+    //         'author_id' => 'required'
+    //         ]);
 
-    /**
-     * [updatePost description]
-     *
-     * @method updatePost
-     * @param Request $request
-     *            [description]
-     * @return {[type] [description]
-     */
-    public function updatePost(Request $request)
-    {
-        $id = $request->input('id');
-        
-        $post = Post::find($id);
-        
-        if (! $post) {
-            
-            $this->success = false;
-            
-            $this->data = [
-                'message' => (string) 'Post not found'
-            ];
-            
-            $this->response_code = 404;
-        } else {
-            
-            if ($request->input('user_id')) {
-                
-                $post->user_id = $request->input('user_id');
-            }
-            
-            if ($request->input('title')) {
-                
-                $post->title = $request->input('title');
-            }
-            
-            if ($request->input('content')) {
-                
-                $post->content = $request->input('content');
-            }
-            
-            $post->save();
-            
-            $this->data = [
-                'id' => (int) $post->id,
-                'user_id' => (int) $post->user_id,
-                'title' => (string) $post->title,
-                'content' => (string) $post->content
-            ];
-            
-            // dd($this->data);
-        }
-        
-        return parent::jsonResponse($this);
-    }
+    //     $defaultStatus = 2; /*2 = pending for Admin approval*/
+
+    //     $post = new Post();
+    //     $post->title = $request->title;
+    //     $post->content = $request->content;
+    //     $post->status = $request->$defaultStatus;
+    //     $post->slug = $required->PostSlugBuilder::createSlug($request->$title)
+    //     $post->recommends = $request->$recommends
+    //     $post->rating = $request->$rating
+    //     $post->category_id = $request->$category_id
+    //     $post->author_id = $request->$author_id
+    //     'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+    //     'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+
+    //     $post->save();
+
+    //     return response()->json(['status' => 'success']);
+    // }
 }

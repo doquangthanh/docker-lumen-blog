@@ -24,6 +24,7 @@ services:
 
   ### MySQL Container
   mysql:
+    container_name: mysql
     build: ./build/mysql
     volumes:
       - /var/lib/mysql
@@ -34,7 +35,9 @@ services:
       MYSQL_USER: ${DB_USER}
       MYSQL_PASSWORD: ${DB_PASS}
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS}
-
+    ports:
+      - "3306:3306"
+      
   ### Redis Container
   redis:
     image: redis
@@ -42,9 +45,17 @@ services:
         - "6379"
 
   ### Application Code Container
-
-
-
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    environment:
+     - PMA_ARBITRARY=1
+    restart: always
+    ports:
+     - 8181:80
+    volumes:
+     - /sessions
+     
   ### Workspace Utilities Container
   workspace:
     build: ./build/workspace

@@ -1,23 +1,23 @@
 <?php
+
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
+   public function user()
+   {
+   		return $this->belongsTo(User::class);
+   }
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'title',
-        'content'
-    ];
+   public function tags()
+   {
+   		return $this->belongsToMany(Tag::class);
+   }
 
-    public function category()
-    {
-        return $this->belongsToMany('app\Category');
-    }
+      public function category()
+   {
+   		return $this->belongsTo(Category::class);
+   }
 }

@@ -1,27 +1,25 @@
 <?php
 
-/*
- * |--------------------------------------------------------------------------
- * | Application Routes
- * |--------------------------------------------------------------------------
- * |
- * | Here is where you can register all of the routes for an application.
- * | It is a breeze. Simply tell Lumen the URIs it should respond to
- * | and give it the Closure to call when that URI is requested.
- * |
- */
-$router->get('/', function () use ($router) {
-    return "microservice blog";
+$app->get('/', function () use ($app) {
+    return $app->version();
 });
 
-$router->get('/posts/all', 'PostsController@getAllPosts');
-$router->get('/posts/get/{id}', 'PostsController@getPost');
-$router->delete('/posts/delete', 'PostsController@deletePost');
-$router->put('/posts/insert', 'PostsController@insertPost');
-$router->put('/posts/update', 'PostsController@updatePost');
+// Route::post('/api/register', 'RegisterController@register');
 
-$router->get('/categories/all', 'CategoriesController@getAllCategories');
-$router->get('/categories/get/{id}', 'CategoriesController@getCategory');
-$router->delete('/categories/delete', 'CategoriesController@deleteCategory');
-$router->put('/categories/insert', 'CategoriesController@insertCategory');
-$router->put('/categories/update', 'CategoriesController@updateCategory');
+$app->group(['prefix' => 'posts'], function ($app) {
+    $app->get('/','PostsController@posts');
+    $app->post('/','PostsController@createPost');
+    $app->get('{id}', 'PostsController@postById');
+    $app->put('/{id}/','PostsController@updatePost');
+    $app->delete('/{id}/','PostsController@deletePost');
+});
+
+$app->group(['prefix' => 'tags'], function ($app) {
+    $app->get('/','TagsController@tags');
+    $app->get('{id}', 'TagsController@tagById');
+});
+
+$app->group(['prefix' => 'categories'], function ($app) {
+    $app->get('/','CategoriesController@categories');
+    $app->get('{id}', 'CategoriesController@categoryById');
+});
