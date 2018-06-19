@@ -33,6 +33,9 @@
 # IntelliJ
 /out/
 
+# Eclipse
+.project
+
 # mpeltonen/sbt-idea plugin
 .idea_modules/
 
@@ -45,8 +48,8 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
+# Other
 .idea/
-
 .env
 
 logs
