@@ -5,7 +5,9 @@ php:
   - 7.2
 sudo: false
 
-install: travis_retry /src/composer install --no-interaction --prefer-source
+install: 
+    cd src/
+    travis_retry composer install --no-interaction --prefer-source
 
 script: /src/vendor/bin/phpunit
 
