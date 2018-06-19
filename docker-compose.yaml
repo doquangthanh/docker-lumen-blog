@@ -1,0 +1,60 @@
+version: '3'
+services:
+  ### PHP-FPM Container
+  php-fpm:
+    build: ./build/php-fpm
+    volumes:
+      - ./src:/var/www
+    expose:
+      - "9000"
+    links:
+      - mysql
+      - redis
+  
+  ### NGINX Container
+  nginx:
+    build: ./build/nginx
+    volumes:
+      - ./logs/nginx/:/var/log/nginx
+      - ./src:/var/www
+    ports:
+      - "80:80"
+    links:
+      - php-fpm
+
+  ### MySQL Container
+  mysql:
+    build: ./build/mysql
+    volumes:
+      - /var/lib/mysql
+    expose:
+      - "3306"
+    environment:
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASS}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS}
+
+  ### Redis Container
+  redis:
+    image: redis
+    expose:
+        - "6379"
+
+  ### Application Code Container
+  application:
+    build: ./build/application
+
+
+  ### Workspace Utilities Container
+  workspace:
+    build: ./build/workspace
+    volumes:
+      - ./src:/var/www
+    links:
+      - mysql
+      - redis
+    tty: true
+
+volumes:
+  src:
