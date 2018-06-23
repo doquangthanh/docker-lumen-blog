@@ -3,7 +3,7 @@
 require_once __DIR__.'/../vendor/autoload.php';
 
 try {
-	(new Dotenv\Dotenv(__DIR__.'/../'))->load();
+    (new Dotenv\Dotenv(__DIR__.'/../'))->load();
 } catch (Dotenv\Exception\InvalidPathException $e) {
     //
 }
@@ -95,8 +95,10 @@ $app->register(App\Providers\CatchAllOptionsRequestsProvider::class);
 */
 
 
-$app->group(['namespace' => 'App\Http\Controllers'], function ($app) {
-	require __DIR__.'/../routes/web.php';
+$app->router->group([
+    'namespace' => 'App\Http\Controllers',
+], function ($router) {
+    require __DIR__.'/../routes/web.php';
 });
 
 return $app;
