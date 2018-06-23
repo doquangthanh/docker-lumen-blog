@@ -1,7 +1,7 @@
 <?php
 
 $router->get('/', function () {
-    return 'Hello World';
+    return 'Micro-services and blazing fast APIs';
 });
 
 

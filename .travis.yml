@@ -3,15 +3,12 @@ sudo: required
 language: php
 services: docker
 php:
-  - 7.1
   - 7.2
-  
+
 branches:
   only: [master]
 
 before_install:
-
-  - docker-compose up -d --build
-  
+  - docker-compose down
 script:
-  - docker ps -a
+  - docker-compose up -d --build
