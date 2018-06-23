@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>LumenBlogAPI</name>
-	<comment></comment>
+	<name>Microservice Lumen Blog Api</name>
+	<comment>Author :Do Quang Thanh thanhdoquang@live.com </comment>
 	<projects>
 	</projects>
 	<buildSpec>
