@@ -31,7 +31,7 @@ class Users extends Model
     {
         return $this->hasMany('App\Models\Posts', 'user_id');
     }
-    
+
     public function roles()
     {
         return $this->hasMany('App\Models\Role', 'id');
@@ -52,23 +52,24 @@ class Users extends Model
     {
         return $this->find($id);
     }
-    
+
     public function getUserEmail($id)
     {
-        return $this->where("email",$id)->get();
+        return $this->where("email", $id)->get();
     }
-    
+
     public function getUserapi_key($id)
     {
-        return $this->where("api_key",$id)->get();
+        return $this->where("api_key", $id)->get();
     }
-    
-    
-    public function updateUserApi($id,$api_key)
+
+    public function updateUserApi($id, $api_key)
     {
-        return $this->where('email', $id)->update(['api_key' => $api_key]);
+        return $this->where('email', $id)->update([
+            'api_key' => $api_key
+        ]);
     }
-    
+
     public function createUser($input)
     {
         return $this->create($input->all());

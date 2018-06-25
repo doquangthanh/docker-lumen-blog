@@ -1,6 +1,8 @@
 # Lumen micro-service for blog posts
-
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
+## Build Code blog framework
+[![Build Status](https://travis-ci.org/doquangthanh/docker-lumen-blog.svg?branch=master)](https://travis-ci.org/doquangthanh/docker-lumen-blog)
+## Build framework
+[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework) 
 [![Total Downloads](https://poser.pugx.org/laravel/lumen-framework/d/total.svg)](https://packagist.org/packages/laravel/lumen-framework)
 [![Latest Stable Version](https://poser.pugx.org/laravel/lumen-framework/v/stable.svg)](https://packagist.org/packages/laravel/lumen-framework)
 [![Latest Unstable Version](https://poser.pugx.org/laravel/lumen-framework/v/unstable.svg)](https://packagist.org/packages/laravel/lumen-framework)
@@ -22,7 +24,7 @@ Easy peasy, simply run the following commands:
 - RESTful routing
 - Models with proper relationships
 - Controllers/Models etc with proper separation of concerns
-- JWT Authentication
+- Authentication
 - RESTful errors
 
 ### .env file
@@ -55,8 +57,8 @@ Returns JSON
       'user_id': (int) // user id of post,
       'title': (string) // post title,
       'content': (string) // post content,
-      'created_at': (string) // created time eg: 2017-03-24 11:47:12,
-      'update_at': (string) // updated time eg: 2017-03-24 11:47:12
+      'created_at': (string) // created time eg: 2018-06-24 11:47:12,
+      'update_at': (string) // updated time eg: 2018-06-24 11:47:12
     }
   ]
 }
@@ -93,8 +95,8 @@ Returns JSON
     'user_id': (int) // user id of post,
     'title': (string) // post title,
     'content': (string) // post content,
-    'created_at': (string) // created time eg: 2017-03-24 11:47:12,
-    'update_at': (string) // updated time eg: 2017-03-24 11:47:12
+    'created_at': (string) // created time eg: 2018-06-24 11:47:12,
+    'update_at': (string) // updated time eg: 2018-06-24 11:47:12
   }
 }
 
@@ -132,8 +134,8 @@ Returns JSON
     'user_id': (int) // user id of post,
     'title': (string) // post title,
     'content': (string) // post content,
-    'created_at': (string) // created time eg: 2017-03-24 11:47:12,
-    'update_at': (string) // updated time eg: 2017-03-24 11:47:12
+    'created_at': (string) // created time eg: 2018-06-24 11:47:12,
+    'update_at': (string) // updated time eg: 2018-06-24 11:47:12
   }
 }
 
