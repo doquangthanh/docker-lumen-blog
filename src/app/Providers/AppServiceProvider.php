@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
+
     /**
      * Register any application services.
      *
@@ -13,9 +14,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-    	if ($this->app->environment() == 'local') {
-    		// Lumen Generator
-    		$this->app->register('Wn\Generators\CommandsServiceProvider');
-    	}
+        if ($this->app->environment() == 'local') {
+            // Lumen Generator
+            $this->app->register('Wn\Generators\CommandsServiceProvider');
+        }
     }
 }

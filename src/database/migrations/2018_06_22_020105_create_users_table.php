@@ -28,6 +28,7 @@ class CreateUsersTable extends Migration
             $table->string('nickname')->nullable();
             $table->string('occupation')->nullable();
             $table->string('address')->nullable();
+            $table->string('api_key')->nullable();            
             $table->integer('role_id')->unsigned();
             $table->enum('is_active', [1, 0]);
             $table->timestamps();

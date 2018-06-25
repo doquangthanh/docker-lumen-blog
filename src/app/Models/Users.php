@@ -12,6 +12,7 @@ class Users extends Model
     protected $fillable = [
         'username',
         'password',
+        'email',
         'first_name',
         'last_name',
         'city',
@@ -51,7 +52,23 @@ class Users extends Model
     {
         return $this->find($id);
     }
-
+    
+    public function getUserEmail($id)
+    {
+        return $this->where("email",$id)->get();
+    }
+    
+    public function getUserapi_key($id)
+    {
+        return $this->where("api_key",$id)->get();
+    }
+    
+    
+    public function updateUserApi($id,$api_key)
+    {
+        return $this->where('email', $id)->update(['api_key' => $api_key]);
+    }
+    
     public function createUser($input)
     {
         return $this->create($input->all());

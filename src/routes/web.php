@@ -30,8 +30,9 @@ $router->group([
     $router->get('{id}', 'CategoriesController@categoryById');
 });
 
+$router->post('/api/login', 'UsersController@login');
 
-$router->group(['prefix' => 'users'], function ($router){
+$router->group(['middleware' => 'auth','prefix' => 'api/users'], function ($router){
     $router->get('/', 'UsersController@getUsers');
     $router->get('{id}/posts', 'UsersController@getUserPosts');
     $router->get('{id}/posts/{postId}', 'UsersController@getUserPost');

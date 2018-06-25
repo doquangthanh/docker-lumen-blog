@@ -1,5 +1,6 @@
 # Automated Deployment on Docker && Microservice Lumen Framework Aplication 
 [![Build Status](https://travis-ci.org/doquangthanh/docker-lumen-blog.svg?branch=master)](https://travis-ci.org/doquangthanh/docker-lumen-blog)
+[![License](https://poser.pugx.org/doquangthanh/docker-lumen-blog/license.svg)](https://packagist.org/packages/laravel/lumen-framework)
 
 ### Install
 
