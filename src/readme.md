@@ -31,19 +31,35 @@ Easy peasy, simply run the following commands:
 
 Duplicate `.env.example` and edit the following line to the bottom of your freshly created `.env` file. This will be the api token your other applications use to gain access to your micro-service. You **should** have secured your micro-services within a VPC or similar WAF to protect against unauthorised calls, but this gives you just that extra bit of protection, should you really need it.
 
-API_TOKEN=**TOKEN_GOES_HERE**
 
 ## Available End Points
 
 All end points require an `api_token` header, which is the same as the one you set in your `.env`  file.
+###  Gen api key token
+`POST /api/login`  
+
+Body:
+
+```JSON
+{
+"email" : "email@gmail.com",
+"password" : "demo@123"
+}
+```
+
+Returns JSON
+```javascript
+{
+    "status": "success",
+    "api_key": "YWZTcWd5Mzh2OWlobnFxV1p1eE1iMnY2b21IOGxxUng="
+}
+```
 
 ### Get all posts
 
 `GET /posts/all`  
 
 Requires the following header:
-
-* `api_token` the api token you added to your `.env` file (required)
 
 Returns JSON  
 
@@ -82,7 +98,7 @@ Accepts the following parameters:
 
 Accepts the following header:
 
-* `api_token` the api token you added to your `.env` file (required)
+* `api_token` the api token you added to your header: Authentication: bearer `api_token` (required)
 
 Returns JSON  
 
@@ -121,7 +137,7 @@ Accepts the following parameters:
 
 Accepts the following header:
 
-* `api_token` the api token you added to your `.env` file (required)
+* `api_token` the api token you added to your header: Authentication: bearer `api_token`  (required)
 
 Returns JSON  
 
@@ -158,7 +174,7 @@ Accepts the following parameter:
 
 Accepts the following header:
 
-* `api_token` the api token you added to your `.env` file (required)
+* `api_token` the api token you added to your header: Authentication: bearer `api_token`  (required)
 
 Returns JSON  
 
@@ -193,7 +209,7 @@ Accepts the following parameters:
 
 Accepts the following header:  
 
-* `api_token` the api token you added to your `.env` file (required)
+* `api_token` the api token you added to your header: Authentication: bearer `api_token`  (required)
 
 Returns JSON  
 
