@@ -19,8 +19,8 @@ class AddForeignKeyToPosts extends Migration
                 ->references('id')
                 ->on('categories')
                 ->onDelete('cascade');
-            
-            $table->foreign('author_id')
+         
+            $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');

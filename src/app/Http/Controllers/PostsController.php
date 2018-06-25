@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Post;
+use App\Models\Posts;
 use App\Services\PostSlugBuilder;
 
 
@@ -35,34 +35,30 @@ class PostsController extends Controller
      /**
     * Create new Post
      */
-    //  public function createPost(Request $request)
-    //  {
+     public function createPost(Request $request)
+     {
 
-    //     $this->validate($request, [
-    //         'title' => 'required',
-    //         'content' => 'required',
-    //         'status' => 'required',
-    //         'slug' => 'required'
-    //         'category_id' => 'required'
-    //         'author_id' => 'required'
-    //         ]);
+        $this->validate($request, [
+            'title' => 'required',
+            'content' => 'required',
+            'status' => 'required',
+            'slug' => 'required',
+            'category_id' => 'required',
+            'author_id' => 'required',
+            ]);
 
-    //     $defaultStatus = 2; /*2 = pending for Admin approval*/
-
-    //     $post = new Post();
-    //     $post->title = $request->title;
-    //     $post->content = $request->content;
-    //     $post->status = $request->$defaultStatus;
-    //     $post->slug = $required->PostSlugBuilder::createSlug($request->$title)
-    //     $post->recommends = $request->$recommends
-    //     $post->rating = $request->$rating
-    //     $post->category_id = $request->$category_id
-    //     $post->author_id = $request->$author_id
-    //     'created_at' => Carbon::now()->format('Y-m-d H:i:s')
-    //     'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
-
-    //     $post->save();
-
-    //     return response()->json(['status' => 'success']);
-    // }
+        $defaultStatus = 2; /*2 = pending for Admin approval*/
+print_r($request);
+        $post = new Post();
+        $post->title = $request->title;
+        $post->content = $request->content;
+        $post->status = $request->$defaultStatus;
+        $post->slug = $required->PostSlugBuilder::createSlug($request->$title);
+        $post->recommends = $request->$recommends;
+        $post->rating = $request->$rating;
+        $post->category_id = $request->$category_id;
+        $post->author_id = $request->$author_id;
+        $post->save();
+        return response()->json(['status' => 'success']);
+    }
 }

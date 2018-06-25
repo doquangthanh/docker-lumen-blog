@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use App\Model\Register;
+
 class RegisterController extends Controller
 {
     /**

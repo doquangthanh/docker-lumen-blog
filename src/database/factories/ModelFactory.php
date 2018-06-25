@@ -27,7 +27,6 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'nickname' => $faker->name,
         'occupation' => $faker->jobTitle,
         'address' => $faker->address,
-        'role_id' => $faker->numberBetween(1, 4),
         'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
     ];

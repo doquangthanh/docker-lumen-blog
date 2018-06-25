@@ -4,7 +4,6 @@ $router->get('/', function () {
     return 'Micro-services and blazing fast APIs';
 });
 
-
 // Route::post('/api/register', 'RegisterController@register');
 
 $router->group([
@@ -30,3 +29,17 @@ $router->group([
     $router->get('/', 'CategoriesController@categories');
     $router->get('{id}', 'CategoriesController@categoryById');
 });
+
+
+$router->group(['prefix' => 'users'], function ($router){
+    $router->get('/', 'UsersController@getUsers');
+    $router->get('{id}/posts', 'UsersController@getUserPosts');
+    $router->get('{id}/posts/{postId}', 'UsersController@getUserPost');
+    $router->get('{id}/comments', 'UsersController@getUserComments');
+    $router->get('{id}/comments/{commentId}', 'UsersController@getUserComment');
+    $router->get('{id}', 'UsersController@getUser');
+    $router->post('/', 'UsersController@createUser');
+    $router->delete('{id}', 'UsersController@deleteUser');
+    $router->put('{id}', 'UsersController@updateUser');
+});
+    

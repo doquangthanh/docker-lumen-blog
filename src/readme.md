@@ -210,6 +210,19 @@ Returns JSON
 }
 ```
 
+### Users
+
+| Method     | URI                               | Action                                                  |
+|------------|-----------------------------------|---------------------------------------------------------|
+| `GET/HEAD` | `users`                           | `App\Http\Controllers\UsersController@getUsers`         |
+| `POST`     | `users`                           | `App\Http\Controllers\UsersController@createUser`       |
+| `PUT`      | `users/{id}`                      | `App\Http\Controllers\UsersController@updateUser`       |
+| `GET/HEAD` | `users/{id}`                      | `App\Http\Controllers\UsersController@getUser`          |
+| `DELETE`   | `users/{id}`                      | `App\Http\Controllers\UsersController@deleteUser`       |
+| `GET/HEAD` | `users/{id}/comments`             | `App\Http\Controllers\UsersController@getUserComments`  |
+| `GET/HEAD` | `users/{id}/comments/{commentId}` | `App\Http\Controllers\UsersController@getUserComment`   |
+| `GET/HEAD` | `users/{id}/posts`                | `App\Http\Controllers\UsersController@getUserPosts`     |
+| `GET/HEAD` | `users/{id}/posts/{postId}`       | `App\Http\Controllers\UsersController@getUserPost`      |
 ## Unit testing
 
 Easy, just run the command `phpunit` from the root directory, composer should install this for you.

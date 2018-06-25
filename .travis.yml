@@ -1,14 +1,17 @@
-
-sudo: required
 language: php
-services: docker
+
+services:
+ - mysql
 php:
   - 7.2
+  - 7.1
+  - 7.0
+  - hhvm
 
-branches:
-  only: [master]
+before_script:
+  - cd src/
+  - composer self-update
+  - composer install --no-interaction
 
-before_install:
-  - docker-compose down
 script:
-  - docker-compose up -d --build
+  - vendor/bin/phpunit
