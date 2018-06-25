@@ -15,7 +15,7 @@ class ExampleTest extends TestCase
         $this->get('/');
 
         $this->assertEquals(
-            $this->app->version(), $this->response->getContent()
+            "Micro-services and blazing fast APIs" , $this->response->getContent()
         );
     }
 }
