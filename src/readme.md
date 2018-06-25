@@ -17,6 +17,14 @@ Easy peasy, simply run the following commands:
 * `composer install`
 * `php artisan migrate`
 
+## Features
+
+- RESTful routing
+- Models with proper relationships
+- Controllers/Models etc with proper separation of concerns
+- JWT Authentication
+- RESTful errors
+
 ### .env file
 
 Duplicate `.env.example` and edit the following line to the bottom of your freshly created `.env` file. This will be the api token your other applications use to gain access to your micro-service. You **should** have secured your micro-services within a VPC or similar WAF to protect against unauthorised calls, but this gives you just that extra bit of protection, should you really need it.
@@ -209,6 +217,29 @@ Returns JSON
   }
 }
 ```
+
+
+## Routes List:
+
+### Comments
+
+| Method     | URI                               | Action                                                  |
+|------------|-----------------------------------|---------------------------------------------------------|
+| `POST`     | `comments`                        | `App\Http\Controllers\CommentsController@createComment` |
+| `GET/HEAD` | `comments`                        | `App\Http\Controllers\CommentsController@getComments`   |
+| `GET/HEAD` | `comments/{id}`                   | `App\Http\Controllers\CommentsController@getComment`    |
+| `DELETE`   | `comments/{id}`                   | `App\Http\Controllers\CommentsController@deleteComment` |
+| `PUT`      | `comments/{id}`                   | `App\Http\Controllers\CommentsController@updateComment` |
+
+### Posts
+
+| Method     | URI                               | Action                                                  |
+|------------|-----------------------------------|---------------------------------------------------------|
+| `POST`     | `posts`                           | `App\Http\Controllers\PostsController@createPost`       |
+| `GET/HEAD` | `posts`                           | `App\Http\Controllers\PostsController@getPosts`         |
+| `PUT`      | `posts/{id}`                      | `App\Http\Controllers\PostsController@updatePost`       |
+| `GET/HEAD` | `posts/{id}`                      | `App\Http\Controllers\PostsController@getPost`          |
+| `DELETE`   | `posts/{id}`                      | `App\Http\Controllers\PostsController@deletePost`       |
 
 ### Users
 
