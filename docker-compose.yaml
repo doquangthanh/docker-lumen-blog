@@ -43,22 +43,11 @@ services:
     image: redis
     expose:
         - "6379"
-
-  ### Application Code Container
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    container_name: phpmyadmin
-    environment:
-     - PMA_ARBITRARY=1
-    restart: always
-    ports:
-     - 8181:80
-    volumes:
-     - /sessions
      
   ### Workspace Utilities Container
   workspace:
     build: ./build/workspace
+    command: composer install
     volumes:
       - ./src:/var/www
     links:

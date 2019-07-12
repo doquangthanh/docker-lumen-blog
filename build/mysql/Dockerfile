@@ -1,4 +1,4 @@
-FROM mysql:5.7
+FROM mysql:5.5
 
 LABEL Maintainer="Do Quang Thanh <thanhdoquang@live.com>"
 

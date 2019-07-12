@@ -43,6 +43,8 @@ Assuming you left the the config value `COMPOSE_PROJECT_NAME=app` you should see
 All you have to do is to run the following command to use the workspace container as your main bash 
 
     $ docker exec -i -t blog_workspace_1 /bin/bash
+    $  composer install
+
 
 And then you will have PHP ready for you, just give it a try!
 
